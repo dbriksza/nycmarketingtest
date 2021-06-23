@@ -5,24 +5,32 @@ $(document).ready(function () {
    */
   if (window.localStorage) {
     if (localStorage.userObject) {
-      const userObject = localStorage.getItem('userObject');
+      const userObject = localStorage.getItem("userObject");
       const retreivedObject = JSON.parse(userObject); //parses the retrieved object into an JSON object
       if (JSON.stringify(retreivedObject) === "[]") {
-        $('#result-count').text("0 Results");
-        $(".result-desc").text(
-          "Try starting a new search below"
-        );
+        $("#result-count").text("0 Results");
+        $(".result-desc").text("Try starting a new search below");
       } else {
-        $('#result-count').text("1 Result");
-        $("#result-subtext").html("Look at the result below to see the details of the person you’re searched for.");
-        $(".name").append(`${retreivedObject.first_name} ${retreivedObject.last_name}`);
-        $('.user-description').append(retreivedObject.description);
+        $("#result-count").text("1 Result");
+        $("#result-subtext").html(
+          "Look at the result below to see the details of the person you’re searched for."
+        );
+        $(".name").append(
+          `${retreivedObject.first_name} ${retreivedObject.last_name}`
+        );
+        $(".user-description").append(retreivedObject.description);
         $("#address").append(`<p>${retreivedObject.address}</p>`);
         $(".email").append(`<p>${retreivedObject.email}</p>`);
 
         for (const phone_number in retreivedObject.phone_numbers) {
-          phone = retreivedObject.phone_numbers[phone_number]
-          formatted_phone = "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + "-" + phone.substring(6, 10);
+          phone = retreivedObject.phone_numbers[phone_number];
+          formatted_phone =
+            "(" +
+            phone.substring(0, 3) +
+            ") " +
+            phone.substring(3, 6) +
+            "-" +
+            phone.substring(6, 10);
 
           $(".phone-num").append(
             `<a href="tel:${phone}" style='display: block;color: #004A80;'>
@@ -40,7 +48,7 @@ $(document).ready(function () {
         $(".result-wrap").show();
       }
     } else {
-        window.location.href = 'index.html'
+      window.location.href = "index.html";
     }
   }
 });
